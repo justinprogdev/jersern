@@ -10,3 +10,5 @@ This is obviously the default and needs to be polished.
 
 To use, paste json in the left pane. Classes will appear in the right pane. 
 There is an example.json in the solution file to try out. 
+
+MIT Licensing - View license.md
