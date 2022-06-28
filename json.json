@@ -1,0 +1,26 @@
+  {
+    "firstName": "Rack",
+    "favoriteDecimal": 3.14,
+    "lastName": "Jackon",
+    "gender": "man", //This is a comment. They will be removed
+    "age": 24,
+    //JsonObject 
+    "address": {
+      "streetAddress": "126",
+      "city": "San Jone",
+      "state": "CA",
+      "postalCode": "394221"
+    },
+    //Json Array
+    "phoneNumbers": [
+      {
+        "type": "home",
+        "number": 7383627627
+      },
+      {
+        "type": "home",
+        "number": 7383127627
+      }
+
+    ]
+  }
