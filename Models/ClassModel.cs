@@ -1,10 +1,20 @@
 ﻿namespace Editor.Models
 {
 
-    internal class ClassModel
+    /// <summary>
+    /// A model for generating class code
+    /// </summary>
+    public class ClassModel
     {
-        internal string Name { get; set; }
-        internal List<Property> Properties { get; set; }
+        /// <summary>
+        /// Class Name
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// List of each of property in the class
+        /// </summary>
+        public List<Property> Properties { get; set; }
 
         public ClassModel()
         {
@@ -12,6 +22,11 @@
             Properties = new List<Property>();
         }
 
+        /// <summary>
+        /// Add a new property to the class model
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="type"></param>
         public void AddProperty(KeyValuePair<string, System.Text.Json.Nodes.JsonNode> item, string type)
         {
             var property = new Property() {
@@ -24,9 +39,9 @@
 
     }
 
-    internal class Property
+    public class Property
     {
-        internal string Name { get; set; }
-        internal string Type { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
     }
 }
