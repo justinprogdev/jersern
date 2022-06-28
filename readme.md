@@ -11,7 +11,7 @@ This is obviously the default installer and needs to be polished and has no cert
 To use, paste json in the left pane. Classes will appear in the right pane. 
 There is an example.json in the solution file to try out. 
 
-**If you get a build error for a file with internet origin** 
+**If you get a build error for a file with internet origin**   
 Go to the EditorForm.Resx file and .ico file in File Explorer/ right click/ open properties/ and at the bottom
 of the properties window click "Unblock"
 
