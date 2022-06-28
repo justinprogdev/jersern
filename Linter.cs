@@ -4,53 +4,58 @@ using System.Text.Json.Nodes;
 
 namespace Editor
 {
-    internal class LintingService
+    /// <summary>
+    /// Provides functionality for converting json and text
+    /// </summary>
+    public class Linter
     {
 
-        public LintingService()
+        public Linter()
         {
         }
 
-        internal JsonObject? ParseText(string text)
+        /// <summary>
+        /// Get Json from text
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public JsonObject? ParseText(string text)
         {
             try
             {
                 var cleanText = CleanText(text);
-                
-               
+
                 var bytes = Encoding.UTF8.GetBytes(cleanText);
-             
+
                 return JsonSerializer.Deserialize<JsonObject>(bytes);
             }
             catch (Exception)
             {
-
+                //Not json, return null
             }
             return null;
         }
 
+        /// <summary>
+        /// Remove unwanted characters from input text
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         private string CleanText(string text)
         {
-            //while (text.Contains("//"))
-            //{
-            //    var startIndex = text.IndexOf('/');
-            //    var endIndex = text.IndexOf('\n', startIndex);
-            //    text = text.Replace(text.Substring(startIndex, endIndex - startIndex), "");
-
-            //}
-            text.Replace("//", " ");
+            //TODO: Add regex for unwanted chars or possibly remove bytes of chars
+            text.Replace("//", "");
             text = text.ReplaceLineEndings("");
-            //while (text.Contains("\\"))
-            //{
-            //    var startIndex2 = text.IndexOf('\\');
-            //    var endIndex2 = text.IndexOf('\n', startIndex2);
-            //    text = text.Replace(text.Substring(startIndex2, endIndex2 - startIndex2), "");
-            //}
-            Console.WriteLine(text);
+
             return text;
         }
 
-        internal Type ParseType(JsonNode value)
+        /// <summary>
+        /// Parses basic System Types from Json data values
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public Type ParseType(JsonNode value)
         {
             if (value == null)
             {
@@ -83,7 +88,7 @@ namespace Editor
                     }
 
                 }
-                catch (Exception ex) { }
+                catch (Exception ex) { } //Todo: better handling
 
                 try
                 {
@@ -96,7 +101,7 @@ namespace Editor
                 }
                 catch (Exception ex)
                 {
-
+                    //Todo: better handling
                 }
             }
 
@@ -106,18 +111,24 @@ namespace Editor
 
         /// <summary>
         /// Determines if it's just a property or
-        /// a if more processing is needed
+        /// if more processing is needed for a nested json object
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        internal bool IsJustProperty(Type type)
+        public bool IsJustProperty(Type type)
         {
             if (type == typeof(JsonArray) || type == typeof(JsonObject))
                 return false;
             return true;
         }
 
-        /// <summary>Converts a .Net type name to a C# type name. It will remove the "System." namespace, if present,</summary>
+        /// <summary>
+        /// Converts a .Net type name to a C# type name. 
+        /// It will remove the "System." namespace, if present
+        /// </summary>
+        /// <param name="dotNetTypeName"></param>
+        /// <param name="isNull"></param>
+        /// <returns></returns>
         public string GetCSharpType(string dotNetTypeName, bool isNull = false)
         {
             string cstype = "";
