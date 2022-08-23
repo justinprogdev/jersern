@@ -15,12 +15,12 @@ namespace Editor
             //Todo add DI to ctor
             InitializeComponent();
             _classModels = new List<ClassModel>();
+            _linter = new Linter();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             txtInput.TextChanged += TxtJson_TextChanged;
-            _linter = new Linter();
         }
 
         /// <summary>
@@ -144,7 +144,6 @@ namespace Editor
                     BuildClass(json, node2.Key);
                 }
             }
-
         }
     }
 }
